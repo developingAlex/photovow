@@ -34,49 +34,48 @@ regardless below are some of them:
 #### User
 - first_name
 - last_name
-- email
+- email (indexed automatically by devise)
 #### Portfolio
 - bio: text
-- user_id: User
+- user_id: User (index this)
 - avatar_data: text  (shrine image)
-- venue: string 
 - city: string
 - country: string
 
 #### Photo
 - image_data: text
-- portfolio_id: Portfolio
+- portfolio_id: Portfolio (index this)
 - description: text
 
 #### Listing
-- owner_id: User
+- owner_id: User (index this)
 - title
 - venue
 - city
 - country
 - content: text
 - date: date
-- accepted_offer: Offer
+- accepted_offer: Offer (index this)
 - date_accepted: date
 
 #### Offer
-- photographer_id: User
+- photographer_id: User (index this)
 - amount: decimal
-- listing_id: Listing
+- listing_id: Listing (index this)
 
 #### Conversation
-- sender_id: User
-- recipient_id: User
+- sender_id: User (index this)
+- recipient_id: User (index this)
 
 #### Message
-- author_id: User
-- conversation_id: Conversation
+- author_id: User (index this)
+- conversation_id: Conversation (index this)
 - content: text
 - time_read: time
 
 #### Review
-- author_id: User
-- portfolio_id: Portfolio
+- author_id: User (index this)
+- portfolio_id: Portfolio (index this)
 - content: text
 - rating: decimal
 
