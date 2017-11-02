@@ -18,6 +18,15 @@ The benefits for the wedding planner is the advertising of their wedding to a co
 - Devise gem (User sign in and authentication)
 - Shrine (image uploading)
 ## Planning
+### User stories:
+
+[User stories are publicly viewable on trello](https://trello.com/b/jZv2nvbp/wedding-photography-site) <br>
+regardless below are some of them:
+
+- In order to get the best price for my wedding photos, as a wedding planner, I want to see the lowest prices photographers will work for.
+- In order to be reasonably confident the photographer I choose takes nice photos, as a wedding planner, I want to be able to view their past work.
+- In order to earn money, as a photographer enthusiast/hobbyist with free-time, I want to be able to apply for work at upcoming weddings that are occurring when I have free time.
+- In order to increase my chances of getting work to earn money, as a talented photographer, I want to be able to showcase my work to stand out from other photographers.
 
 ### Database tables / Models
 
