@@ -17,6 +17,7 @@ The benefits for the wedding planner is the advertising of their wedding to a co
 ### Ruby Gems
 - Devise gem (User sign in and authentication)
 - Shrine (image uploading)
+- dotenv (environment variable compartmentalisation (prevent sensitive info permeating source code that eventually ends up public on github))
 ## Planning
 ### User stories:
 
