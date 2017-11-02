@@ -56,7 +56,7 @@ regardless below are some of them:
 - country
 - content: text
 - date: date
-- accepted_offer: Offer (index this)
+- accepted_offer: integer (the id of the offer that is accepted, not a reference to avoid circular reference)
 - date_accepted: date
 
 #### Offer
