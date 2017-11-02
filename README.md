@@ -91,3 +91,6 @@ regardless below are some of them:
 &lt;To be completed&gt;
 
 ## Notable issues or stuggles encountered along the way
+1. I forgot to run the rails new command with --database=postgresql so had to do a second dummy take to get the right content for the database.yml file.
+1. In creating the conversation model which has foreign keys to the users table, I initially named the references sender\_id and recipient\_id but this meant they were then becoming sender\_id\_id and recipient\_id\_id so renamed back to sender and recipient in the migration file.
+1. 
