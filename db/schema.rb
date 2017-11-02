@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171102064932) do
+ActiveRecord::Schema.define(version: 20171102065121) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -33,6 +33,15 @@ ActiveRecord::Schema.define(version: 20171102064932) do
     t.datetime "updated_at", null: false
     t.index ["author_id"], name: "index_messages_on_author_id"
     t.index ["conversation_id"], name: "index_messages_on_conversation_id"
+  end
+
+  create_table "photos", force: :cascade do |t|
+    t.text "image_data"
+    t.bigint "portfolio_id"
+    t.text "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["portfolio_id"], name: "index_photos_on_portfolio_id"
   end
 
   create_table "portfolios", force: :cascade do |t|
@@ -69,5 +78,6 @@ ActiveRecord::Schema.define(version: 20171102064932) do
   add_foreign_key "conversations", "users", column: "sender_id"
   add_foreign_key "messages", "users", column: "author_id"
   add_foreign_key "messages", "users", column: "conversation_id"
+  add_foreign_key "photos", "portfolios"
   add_foreign_key "portfolios", "users"
 end
