@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171102055230) do
+ActiveRecord::Schema.define(version: 20171102064932) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,6 +22,28 @@ ActiveRecord::Schema.define(version: 20171102055230) do
     t.datetime "updated_at", null: false
     t.index ["recipient_id"], name: "index_conversations_on_recipient_id"
     t.index ["sender_id"], name: "index_conversations_on_sender_id"
+  end
+
+  create_table "messages", force: :cascade do |t|
+    t.bigint "author_id"
+    t.bigint "conversation_id"
+    t.text "content"
+    t.datetime "time_read"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["author_id"], name: "index_messages_on_author_id"
+    t.index ["conversation_id"], name: "index_messages_on_conversation_id"
+  end
+
+  create_table "portfolios", force: :cascade do |t|
+    t.text "bio"
+    t.bigint "user_id"
+    t.text "avatar_data"
+    t.string "city"
+    t.string "country"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_portfolios_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -45,4 +67,7 @@ ActiveRecord::Schema.define(version: 20171102055230) do
 
   add_foreign_key "conversations", "users", column: "recipient_id"
   add_foreign_key "conversations", "users", column: "sender_id"
+  add_foreign_key "messages", "users", column: "author_id"
+  add_foreign_key "messages", "users", column: "conversation_id"
+  add_foreign_key "portfolios", "users"
 end
