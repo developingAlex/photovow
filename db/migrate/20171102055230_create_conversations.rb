@@ -6,8 +6,8 @@ class CreateConversations < ActiveRecord::Migration[5.1]
 
       t.timestamps
 
-      add_index :sender_id
-      add_index :recipient_id
+      t.index :sender_id
+      t.index :recipient_id
     end
   end
 end
