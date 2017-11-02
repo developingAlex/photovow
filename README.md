@@ -35,6 +35,7 @@ regardless below are some of them:
 - first_name
 - last_name
 - email (indexed automatically by devise)
+
 #### Portfolio
 - bio: text
 - user_id: User (index this)
