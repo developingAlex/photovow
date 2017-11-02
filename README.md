@@ -65,8 +65,8 @@ regardless below are some of them:
 - listing_id: Listing (index this)
 
 #### Conversation
-- sender_id: User (index this)
-- recipient_id: User (index this)
+- sender_id: User (indexed by default from the t.references line in the migration file)
+- recipient_id: User (indexed by default from the t.references line in the migration file)
 
 #### Message
 - author_id: User (index this)
