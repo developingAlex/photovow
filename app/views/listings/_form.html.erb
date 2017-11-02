@@ -1,0 +1,62 @@
+<%= form_with(model: listing, local: true) do |form| %>
+  <% if listing.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(listing.errors.count, "error") %> prohibited this listing from being saved:</h2>
+
+      <ul>
+      <% listing.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :owner_id %>
+    <%= form.text_field :owner_id, id: :listing_owner_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :title %>
+    <%= form.text_field :title, id: :listing_title %>
+  </div>
+
+  <div class="field">
+    <%= form.label :venue %>
+    <%= form.text_field :venue, id: :listing_venue %>
+  </div>
+
+  <div class="field">
+    <%= form.label :city %>
+    <%= form.text_field :city, id: :listing_city %>
+  </div>
+
+  <div class="field">
+    <%= form.label :country %>
+    <%= form.text_field :country, id: :listing_country %>
+  </div>
+
+  <div class="field">
+    <%= form.label :content %>
+    <%= form.text_area :content, id: :listing_content %>
+  </div>
+
+  <div class="field">
+    <%= form.label :date %>
+    <%= form.date_select :date, id: :listing_date %>
+  </div>
+
+  <div class="field">
+    <%= form.label :accepted_offer %>
+    <%= form.number_field :accepted_offer, id: :listing_accepted_offer %>
+  </div>
+
+  <div class="field">
+    <%= form.label :date_accepted %>
+    <%= form.date_select :date_accepted, id: :listing_date_accepted %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
