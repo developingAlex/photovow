@@ -1,6 +1,16 @@
 <p id="notice"><%= notice %></p>
+<p>
+Stop wondering where all the work is! It&rsquo;s right here!
+</p>
 
-<h1>Listings</h1>
+<% @listings.each do |listing| %>
+  <div class="listing">
+    <h3>
+      <%= link_to listing.title, listing %>
+    </h3>
+  </div>
+<% end %>
+
 
 <table>
   <thead>
@@ -21,7 +31,7 @@
   <tbody>
     <% @listings.each do |listing| %>
       <tr>
-        <td><%= listing.owner %></td>
+        <td><%= listing.owner.fullname %></td>
         <td><%= listing.title %></td>
         <td><%= listing.venue %></td>
         <td><%= listing.city %></td>

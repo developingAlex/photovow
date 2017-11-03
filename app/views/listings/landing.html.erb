@@ -3,6 +3,10 @@
 PhotoVow is the platform that connects skilled photographers with wedding planners
 </p>
 
-<%= link_to 'See upcoming weddings', 'listings#index', class: "center" %>
-<br><br>
-<%= link_to 'List your wedding', 'listings#new', class: "center" %>
+
+<p class="center">
+  <%= link_to 'See upcoming weddings', listings_path %>
+  <br>
+  <br>
+  <%= link_to 'List your wedding', new_listing_path %>
+</p>

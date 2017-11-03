@@ -16,3 +16,8 @@
   .center{
     text-align: center;
   }
+
+  .listing{
+    border: 1px, red, solid;
+    background-color: lightgrey;
+  }
