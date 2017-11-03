@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   resources :listings
+  root :to => 'listings#landing'
   resources :reviews
   resources :photos
   resources :portfolios
