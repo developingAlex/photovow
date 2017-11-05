@@ -1,6 +1,7 @@
 class ListingsController < ApplicationController
-  before_action :set_listing, only: [:show, :edit, :update, :destroy]
-  before_action :authenticate_user!, only:[:new, :destroy, :update]
+  before_action :set_listing, only: [:show, :apply, :submit_offer, :edit, :update, :destroy]
+  before_action :authenticate_user!, only:[:new, :apply, :destroy, :update]
+  before_action :prevent_offers_to_themselves, only:[:apply]
 
   # root
   def landing
@@ -15,6 +16,16 @@ class ListingsController < ApplicationController
   # GET /listings/1
   # GET /listings/1.json
   def show
+    if user_signed_in?
+      possible_offers = Offer.where(photographer: current_user, listing: @listing)
+      if possible_offers.empty?
+        @previous_offer = nil
+      else
+        @previous_offer = possible_offers.first
+      end
+    else
+      @previous_offer = nil
+    end
   end
 
   # GET /listings/new
@@ -26,6 +37,51 @@ class ListingsController < ApplicationController
   def edit
   end
 
+  # GET 'listings/1/apply'
+  def apply
+    #if the current user already has an offer on this listing then make the button say revise offer, instead of apply.
+    if current_user == @listing.owner
+      redirect_to @listing
+    end
+    past_offer = Offer.where(photographer: current_user, listing: @listing)
+    if past_offer.empty?
+      @user_already_applied = false
+      @offer = Offer.new
+    else
+      @offer = past_offer.first
+      @previous_offer = past_offer.first
+      @user_already_applied = true
+    end
+  end
+
+  
+  # POST /listings/1/apply
+  def submit_offer
+    #create a new offer model if the person has not already made an offer, if they have then bring up their old one and change the value.
+    puts "####### begin dirty debug #######"
+    past_offer = Offer.where(photographer: current_user, listing: @listing)
+    if past_offer.empty?
+      Offer.create!(photographer: current_user, amount: offer_params[:amount], listing: @listing)
+      puts "created an offer with photographer of #{current_user.first_name}, amount of #{offer_params[:amount]}, against listing: #{@listing.title}"
+    else
+      @previous_offer = past_offer.first
+      @previous_offer.amount = offer_params[:amount]
+      if @previous_offer.valid?
+        @previous_offer.save
+      end
+    end
+    puts "####### end dirty debug #######"
+  end
+
+  def revise_offer
+    past_offer = Offer.where(photographer: current_user, listing: @listing)
+    @offer = past_offer.first
+    if !@offer.nil? && offer_params[:amount] > 0
+      @offer.amount = offer_params[:amount]
+    else
+
+    end
+  end
   # POST /listings
   # POST /listings.json
   def create
@@ -75,5 +131,19 @@ class ListingsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def listing_params
       params.require(:listing).permit(:owner_id, :title, :venue, :city, :country, :content, :date, :accepted_offer, :date_accepted)
+    end
+
+    def offer_params
+      params.require(:apply).permit(:id, :amount)
+    end
+
+    def prevent_offers_to_themselves
+      
+
+      if current_user == @listing.owner
+        flash[:error] = "you can't apply to your own listing"
+        
+        redirect_to @listing
+      end
     end
 end

@@ -21,3 +21,8 @@
     border: 1px, red, solid;
     background-color: lightgrey;
   }
+
+  #already-offered-notice {
+    color: green;
+    font-weight: bold;
+  }

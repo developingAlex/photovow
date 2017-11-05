@@ -1,6 +1,20 @@
 Rails.application.routes.draw do
-  resources :listings
+  # get 'offer/index'
+  # get 'offer/create'
+  # get 'offer/new'
+  # get 'offer/edit'
+  # get 'offer/show'
+  # get 'offer/update'
+  # get 'offer/destroy'
+
   root :to => 'listings#landing'
+  get '/listings/:id/apply' => 'listings#apply', as: 'apply_listing'
+  # post '/listings/:id/apply' => 'listings#submitoffer', as: 'submit_offer_listing'
+  patch '/listings/:id/revise_offer_listing' => 'offers#edit', as: 'revise_offer_listing'
+  # patch '/listings/:id/revise_offer_listing' => 'offers#edit', as: '/listings/:id/revise_offer_listing'
+  resources :listings do
+    resources :offer
+  end
   resources :reviews
   resources :photos
   resources :portfolios
