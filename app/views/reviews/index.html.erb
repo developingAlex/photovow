@@ -1,6 +1,40 @@
 <p id="notice"><%= notice %></p>
 
 <h1>Reviews for <%= @portfolio.user.fullname %></h1>
+<%#
+stars date
+description
+author
+%>
+<table>
+  <tbody>
+    <% @reviews.each do |review| %>
+      <tr>
+        <td>
+        
+        <table><tr><td>
+        
+          <span><%######## Begin STARS #######%>
+          <% format_stars(review.rating).each do |star| %>
+            <i><%= fa_icon star %></i>
+          <% end %>
+          </span><%######## end STARS #######%>
+        
+        </td>
+        <td><%= review.updated_at.to_formatted_s(:long) %>
+        </td></tr></table>
+
+        </td>
+      </tr>
+      <tr>
+        <td><%= review.content %> </td>
+      </tr>
+      <tr>
+        <td><%= review.author.fullname %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
 
 <table>
   <thead>

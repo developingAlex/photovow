@@ -5,7 +5,7 @@ class ReviewsController < ApplicationController
   # GET /reviews
   # GET /reviews.json
   def index
-    @reviews = Review.all
+    @reviews = Review.where(portfolio: @portfolio).order(created_at: :desc)    
   end
 
   # GET /reviews/1
