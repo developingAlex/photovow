@@ -1,29 +1,36 @@
+
 <p id="notice"><%= notice %></p>
-
 <p>
-  <strong>Bio:</strong>
-  <%= @portfolio.bio %>
+  <strong><%= @portfolio.user.fullname %></strong>
 </p>
 
 <p>
-  <strong>User:</strong>
-  <%= @portfolio.user %>
-</p>
-
-<p>
-  <strong>Avatar data:</strong>
+  <strong>&lt;Avatar data&gt;</strong>
   <%= @portfolio.avatar_data %>
 </p>
 
-<p>
-  <strong>City:</strong>
-  <%= @portfolio.city %>
-</p>
+<% if @portfolio.user == current_user %>
+  <%= link_to 'Edit', edit_portfolio_path(@portfolio) %>
+<% end %>
+<%# number of reviews %>
+<%= link_to @reviews_link_text, portfolio_reviews_path(@portfolio) %>
+
 
 <p>
-  <strong>Country:</strong>
-  <%= @portfolio.country %>
+  <%= @portfolio.bio %>
 </p>
 
-<%= link_to 'Edit', edit_portfolio_path(@portfolio) %> |
+
+<p>
+  <%= @portfolio.user.first_name %> is based in <br>
+  <%= @portfolio.city %>, <%= @portfolio.country %>
+</p>
+
+<% if @portfolio_has_photos %>
+  <h2> Some of <%= @portfolio.user.first_name %>&rsquo;s work: </h2>
+  <% @portfolio_photos.each do |photo| %>
+    <%= link_to photo.description, portfolio_photo_path(@portfolio, photo) %><br>
+  <% end %>
+<% end %>
+
 <%= link_to 'Back', portfolios_path %>
