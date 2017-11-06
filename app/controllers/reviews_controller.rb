@@ -1,5 +1,6 @@
 class ReviewsController < ApplicationController
   before_action :set_review, only: [:show, :edit, :update, :destroy]
+  before_action :set_portfolio
 
   # GET /reviews
   # GET /reviews.json
@@ -63,6 +64,9 @@ class ReviewsController < ApplicationController
 
   private
     # Use callbacks to share common setup or constraints between actions.
+    def set_portfolio
+      @portfolio = Portfolio.find(params[:portfolio_id])
+    end
     def set_review
       @review = Review.find(params[:id])
     end
