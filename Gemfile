@@ -11,6 +11,10 @@ gem 'dotenv-rails', groups: [:development, :test]
 #devise for user logins:
 gem 'devise'
 
+#font awesome for stars
+gem 'font-awesome-rails'
+# css library;
+gem 'bootstrap', '~> 4.0.0.beta2.1'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.1.4'
 # Use postgres as the database for Active Record

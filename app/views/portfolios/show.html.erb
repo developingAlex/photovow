@@ -10,9 +10,17 @@
 </p>
 
 <% if @portfolio.user == current_user %>
-  <%= link_to 'Edit', edit_portfolio_path(@portfolio) %>
+  <%= link_to 'Edit', edit_portfolio_path(@portfolio) %><br>
 <% end %>
 <%# number of reviews %>
+<span><%######## Begin STARS #######%>
+<% format_stars_portfolio_average(@portfolio).each do |star| %>
+<%# format_stars(@portfolio.reviews.average(:rating)).each do |star| %>
+  <i><%= fa_icon star %></i>
+<% end %>
+</span><%######## end STARS #######%> 
+&lpar;<%= score_as_percentage(@portfolio) %>&percnt;&rpar;
+
 <%= link_to @reviews_link_text, portfolio_reviews_path(@portfolio) %>
 
 
