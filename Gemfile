@@ -11,6 +11,12 @@ gem 'dotenv-rails', groups: [:development, :test]
 #devise for user logins:
 gem 'devise'
 
+# Shrine Dependencies
+gem 'fastimage'
+gem 'image_processing'
+gem 'mini_magick'
+gem 'shrine'
+
 #font awesome for stars
 gem 'font-awesome-rails'
 # css library;

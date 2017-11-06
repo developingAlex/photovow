@@ -100,3 +100,35 @@ regardless below are some of them:
 1. Spend a few hours coding the logic behind determining if a user is making a new offer on a listing or revising their existing one, only to realise after looking into a routing issue that giving a model to a form makes the form smart enough to know that the submit button will then invoke a POST or PATCH depending on whether the object passed in is a new one or an existing one. That POST or PATCH can then be routed to the appropriate action. which is obvious as it's how scaffolding works out the box...
 1. Realise after multiple routing errors that I was not going to succeed in the direction I was trying to go, possibly because I was not passing through two arguments to a nested resource in the 'apply' link of the listing show page. 
 1. Reaslise that the routing error I was spending hours trying to tackle and multiple variations of syntax, was due to my form not being declared to be on two different models, (which was neccessary because the models were nested.)
+1. After half a day of struggling with Shrine to get it to work, and viewing over and over my instructors screen recording of the tutorial from when he went through it in class, I finally got the shrine image uploading to work and the issue was from an incorrect syntax in the __image_uploader.rb__ file. See this segment of code:
+    ```
+    def process(io, context)
+      case context[:phase]
+      when :store
+        size_700 = resize_to_limit(io.download, 700, 700)
+        size_500 = resize_to_limit(size_700, 500, 500)
+        size_300 = resize_to_limit(size_500, 300, 300)
+        thumb = resize_to_limit(size_300, 200, 200)
+        { original: io, large: size_700, medium: size_500, small: size_300, thumb: thumb }
+      end
+    end
+    ```
+    because it was originally like this:
+    ```
+    def process(io, context)
+      case context[:phase]
+      when :store
+        size_700 = resize_to_limit!(io.download, 700, 700)
+        size_500 = resize_to_limit(size_700, 500, 500)
+        size_300 = resize_to_limit(size_500, 300, 300)
+        thumb = resize_to_limit!(size_300, 200, 200)
+        { original: io, large: size_700, medium: size_500, small: size_300, thumb: thumb }
+      end
+    end
+    ```
+    Those extra exclamation marks were copy and paste errors.
+    The error message I would get didn't hint that that was the cause, uploading of images appeared to function alright, but upon attempting to display the image on the page it was produce a rails error screen because the image_url tag wouldn't work or it would display an error similar to any of the following depending on the variation of syntax I would try to use:
+      * `Unexpected token at '#<ActionDispatch::Http::UploadedFile:0x078...>`
+      * `Undefined method 'image_url' for #....`
+      * `Undefined method 'image_data' for ...`
+      * No error produced, but attempt to display the image results in `#<ActionDispatch::Http::UploadedFile:0x078...>` being printed instead of an image being displayed.

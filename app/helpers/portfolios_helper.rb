@@ -1,12 +1,17 @@
 module PortfoliosHelper
-  # Rounds to nearest 0.5
+  # Rounds to nearest 0.5 (portfolio helper)
   def round_stars(average)
     (average * 2).round / 2.0  
   end
 
   # Formats stars from: https://github.com/piratechicken/bookreviews/blob/master/app
   def average_stars_score(portfolio)
-    portfolio.reviews.average(:rating)
+    if !portfolio.reviews.average(:rating).nil?
+      portfolio.reviews.average(:rating)
+    else
+      0
+    end
+
   end
 
   def score_as_percentage(portfolio)

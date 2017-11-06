@@ -1,6 +1,6 @@
 module ReviewsHelper
-    # Rounds to nearest 0.5
-    def round_stars(average)
+    # Rounds to nearest 0.5 (reviews helper)
+    def round_review_stars(average)
       (average * 2).round / 2.0  
     end
   
@@ -9,7 +9,7 @@ module ReviewsHelper
     def format_stars(rating)
 
       average_stars = rating
-      rounded_stars = round_stars(average_stars)
+      rounded_stars = round_review_stars(average_stars)
       stars_arr = []
   
       rounded_stars.floor.times do |index| 

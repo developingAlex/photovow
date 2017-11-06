@@ -22,9 +22,17 @@
   </div>
 
   <div class="field">
-    <%= form.label :avatar_data %>
-    <%= form.text_area :avatar_data, id: :portfolio_avatar_data %>
+    <%= form.label :image %>
+    <%= form.file_field :image, id: :portfolio_image %>
   </div>
+  <%- if @portfolio.image_data? %>
+    <div class="field">
+      <%#= image_tag @portfolio.avatar_image_url(:thumb) %>
+    </div>
+    <div class="field">
+      Remove attachment: <%= form.check_box :remove_image %>
+    </div>
+  <%- end %>
 
   <div class="field">
     <%= form.label :city %>
