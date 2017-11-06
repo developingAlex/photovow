@@ -1,0 +1,47 @@
+<h2> <%= @listing.title %> </h2>
+<p>
+  <strong>Location:</strong>
+  <%= @listing.venue %>, <%= @listing.city %>, <%= @listing.country %>
+</p>
+
+<p>
+  <strong>Date:</strong>
+  <%= @listing.date %>
+</p>
+
+<p>
+  <%= @listing.content %>
+</p>
+
+<h3> <%= @user_already_applied ? "Revise your offer" : "Apply" %>  for this listing:</h3>
+<% url = 'new_listing_offer_path' %>
+<% if @user_already_applied %>
+  Your previous offer was <%= number_to_currency(@previous_offer.amount) %>
+  <% url = 'revise_offer_listing_path' %>
+<% end %>
+
+<%= form_with(model: [@listing, @offer], local: true) do |form| %>
+  <% if @listing.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@listing.errors.count, "error") %> prohibited this listing from being saved:</h2>
+
+      <ul>
+      <% @listing.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :amount %>
+    <%= form.text_field :amount, id: :offer_amount %>
+  </div>
+  <div class="actions">
+    <% if @user_already_applied %>
+        <%= form.submit 'Revise your offer' %>
+    <% else %>
+      <%= form.submit 'Apply' %>
+    <% end %>
+  </div>
+<% end %>

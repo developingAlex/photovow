@@ -10,6 +10,15 @@ class PortfoliosController < ApplicationController
   # GET /portfolios/1
   # GET /portfolios/1.json
   def show
+    @portfolio_photos = Photo.where(portfolio: @portfolio)
+    if @portfolio_photos.empty?
+      @portfolio_has_photos = false
+    else
+      @portfolio_has_photos = true
+    end
+    reviews = Review.where(portfolio: @portfolio)
+    number_of_reviews = reviews.count
+    @reviews_link_text = "#{number_of_reviews} reviews"
   end
 
   # GET /portfolios/new

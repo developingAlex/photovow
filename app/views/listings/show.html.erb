@@ -1,33 +1,12 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>Owner:</strong>
-  <%= @listing.owner %>
-</p>
+  <strong><%= @listing.title %></strong>
+</p>  
 
 <p>
-  <strong>Title:</strong>
-  <%= @listing.title %>
-</p>
-
-<p>
-  <strong>Venue:</strong>
-  <%= @listing.venue %>
-</p>
-
-<p>
-  <strong>City:</strong>
-  <%= @listing.city %>
-</p>
-
-<p>
-  <strong>Country:</strong>
-  <%= @listing.country %>
-</p>
-
-<p>
-  <strong>Content:</strong>
-  <%= @listing.content %>
+  <strong>Location:</strong>
+  <%= @listing.venue %>, <%= @listing.city %>, <%= @listing.country %>
 </p>
 
 <p>
@@ -36,14 +15,25 @@
 </p>
 
 <p>
-  <strong>Accepted offer:</strong>
-  <%= @listing.accepted_offer %>
+  <%= @listing.content %>
 </p>
 
 <p>
-  <strong>Date accepted:</strong>
-  <%= @listing.date_accepted %>
+  <strong>Owner:</strong>
+  <%= @listing.owner.fullname %>
 </p>
-
-<%= link_to 'Edit', edit_listing_path(@listing) %> |
+<% already_offered = user_already_offered(current_user, @listing) %>
+<% if already_offered %>
+  <p id="already-offered-notice"> you have offered to work this wedding for <%= number_to_currency(@previous_offer.amount) %> </p>
+<% end %>
+<% if current_user == @listing.owner %>
+  <%= link_to 'Edit', edit_listing_path(@listing) %> 
+<% else %>
+  <% if already_offered %>
+    <%= link_to 'Revise offer', apply_listing_path(@listing) %> 
+  <% else %>
+    <%= link_to 'Apply', apply_listing_path(@listing) %> 
+  <% end %>
+<% end %>
+ |
 <%= link_to 'Back', listings_path %>
