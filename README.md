@@ -1,9 +1,11 @@
 # PhotoVow
-## Description - Problem statement
+## Description
+### Problem statement
 When wedding planners organise weddings, one of the most crucial resources to arrange is a photographer for the event. There are commercial photographers established within the wedding industry but they are in high demand and command high prices.<br><br>
-Competent hobbyist and enthusiast photographers motivated to work the occasional wedding in their spare time may not have the time to invest in the establishment of a full-time business and associated costs such as business websites and marketing.<br><br>
-This site would give such photographers a platform to be exposed to the available wedding work and also to showcase their talent, allowing them to earn money from the skills they possess.<br><br>
-The benefits for the wedding planner is the advertising of their wedding to a community of photographers who can apply and name their price, the wedding planner can then choose the right photographer for them given desired level of skill and budget.
+Competent hobbyist and enthusiast photographers motivated to work the occasional wedding in their spare time may not have the time to invest in the establishment of a full-time business and associated costs such as business websites and marketing.
+### Solution
+Make a 2-sided marketplace that would give such photographers a platform to be exposed to the available wedding work and also to showcase their talent, allowing them to earn money from the skills they possess.<br><br>
+The benefits for the wedding planner is the advertising of their wedding to a community of photographers who can apply and name their price, the wedding planner can then choose the right photographer for them, given the desired level of skill and budget.
 
 ## Employed technologies
 - Trello.com (Project planning, user stories, todo list, issue tracking)
@@ -134,10 +136,9 @@ regardless below are some of them:
       * No error produced, but attempt to display the image results in `#<ActionDispatch::Http::UploadedFile:0x078...>` being printed instead of an image being displayed.
 1. In regards to the previous point, I verified it was working by testing with another test user account which did not yet have a portfolio picture, upon revisiting the original problematic test account the error still occurred when trying to update the portfolios image through the url .../portfolio/1/edit.
  `JSON::ParserError: 743: unexpected token at '#<ActionDispatch::Http::UploadedFile:0x007f4908044b30>'
-`
-The issue must have been that the image stored in the portfolio model was corrupted by my previous attempts to upload an image. It's highly likely that this had something to do with the errors I was getting before, but the exclamation marks probably still needed correcting..
-  * lesson learned: if at first you don't succeed, try again. If it's been two hours, recreate all data fresh, and restart all servers.
+`The issue must have been that the image stored in the portfolio model was corrupted by my previous attempts to upload an image. It's highly likely that this had something to do with the errors I was getting before, but the exclamation marks probably still needed correcting..
+    * lesson learned: if at first you don't succeed, try again. If it's been two hours, recreate all data fresh, and restart all servers.
 1. Realise that the layout I had defined in my figma would require a greater understanding of dealing with forms and mixing two different active records together so decided to go with the easiest option to get as much implemented by the deadline.
-  * lesson learned: know more your capabilities and plan for deadlines.
+    * lesson learned: know more your capabilities and plan for deadlines.
 1. Didn't realise the consequences of my decision to put the first\_name and last\_name attributes against the devise user model would impact my ability to give the user the ability to change them when they're editing their portfolio because I'm effectively wanting to give them the ability to edit aspects of two different models in the one form. A stackoverflow answer suggests using a method called accepts\_nested\_attributes\_for :othermodel in the model that the form is predominantly about. The issue I discovered with this approach is that validation fails because the attempt to update through the form results in an error notice that email and password can't be blank, so by incorporating some of the attributes from the user model, it then expected to get all the attributes for the user model. I tried to add the email and password as hidden fields in the form to see if that would do the trick but that didn't work because then the error message became "that email is already taken" as if it was attempting to create an entirely new user. I'm sure Devise has done some magic in that area and to provide some security (it seems dodgy putting a password in a hidden field) so at this point I think I will have to diverge from my wireframes again and direct the user to edit their first\_name and last\_name attributes through the forms provided by devise like to update their passwords or email address.
-  * lesson learned: Don't try to partially mess with a model that is under the guise of Devise.
+    * lesson learned: Don't try to partially mess with a model that is under the guise of Devise.
