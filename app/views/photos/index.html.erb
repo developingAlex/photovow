@@ -18,9 +18,9 @@
         <td><%= photo.image_data %></td>
         <td><%= photo.portfolio %></td>
         <td><%= photo.description %></td>
-        <td><%= link_to 'Show', photo %></td>
-        <td><%= link_to 'Edit', edit_photo_path(photo) %></td>
-        <td><%= link_to 'Destroy', photo, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Show', portfolio_photo_path(@portfolio, photo) %></td>
+        <td><%= link_to 'Edit', edit_portfolio_photo_path(@portfolio, photo) %></td>
+        <td><%= link_to 'Destroy', portfolio_photo_path(@portfolio, photo), method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
@@ -28,4 +28,4 @@
 
 <br>
 
-<%= link_to 'New Photo', new_photo_path %>
+<%= link_to 'New Photo', new_portfolio_photo_path(@portfolio) %>

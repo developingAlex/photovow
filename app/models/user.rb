@@ -6,6 +6,9 @@ class User < ApplicationRecord
   
   has_one :portfolio
   has_many :photos, through: :portfolios
+  validates :first_name, presence: true
+  validates :last_name, presence: true
+
 
   def fullname
     "#{first_name} #{last_name}"
