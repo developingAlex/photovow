@@ -12,20 +12,27 @@
   <% end %>
 
   <div class="field">
-    <%= form.label :bio %>
+    <%= form.label :Biography %><br>
     <%= form.text_area :bio, id: :portfolio_bio %>
   </div>
 
   <div class="field">
-    <%= form.label :user_id %>
-    <%= form.text_field :user_id, id: :portfolio_user_id %>
+  <%- if @portfolio.image_data? %>
+  current portfolio photo:
+    <div class="field">
+      <%= image_tag @portfolio.image_url(:thumb) %>
+    </div>
+    <div class="field">
+      Remove photo? <%= form.check_box :remove_image %>
+    </div>
+    <%= form.label :set_new_portfolio_photo %>
+  <% else %>
+    <%= form.label :upload_a_photo_of_yourself %>
+  <%- end %>
+    
+    <%= form.file_field :image, id: :portfolio_image %>
   </div>
-
-  <div class="field">
-    <%= form.label :avatar_data %>
-    <%= form.text_area :avatar_data, id: :portfolio_avatar_data %>
-  </div>
-
+  <h4> Where you work most: </h4>
   <div class="field">
     <%= form.label :city %>
     <%= form.text_field :city, id: :portfolio_city %>

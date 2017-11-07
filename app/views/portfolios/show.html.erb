@@ -4,25 +4,31 @@
   <strong><%= @portfolio.user.fullname %></strong>
 </p>
 
-<p>
-  <strong>&lt;Avatar data&gt;</strong>
-  <%= @portfolio.avatar_data %>
-</p>
+
+<% if @portfolio.image_data.present? # avatar_data is stored as text, so no image means empty string "" NOT nil  %>
+  <%= image_tag @portfolio.image[:small].url %><br>
+<% else %>
+  <%= image_tag "placeholder-avatar.png" %><%## display placeholder until user uploads an image. #%>
+<% end %>
+
+<br>
 
 <% if @portfolio.user == current_user %>
   <%= link_to 'Edit', edit_portfolio_path(@portfolio) %><br>
 <% end %>
 <%# number of reviews %>
-<span><%######## Begin STARS #######%>
-<% format_stars_portfolio_average(@portfolio).each do |star| %>
-<%# format_stars(@portfolio.reviews.average(:rating)).each do |star| %>
-  <i><%= fa_icon star %></i>
+<% if @portfolio.reviews.count > 0 %>
+  <span><%######## Begin STARS #######%>
+  <% format_stars_portfolio_average(@portfolio).each do |star| %>
+  <%# format_stars(@portfolio.reviews.average(:rating)).each do |star| %>
+    <i><%= fa_icon star %></i>
+  <% end %>
+  </span><%######## end STARS #######%>
+  &lpar;<%= score_as_percentage(@portfolio) %>&percnt;&rpar;
+  <%= link_to @reviews_link_text, portfolio_reviews_path(@portfolio) %>
+<% else %>
+  0 reviews
 <% end %>
-</span><%######## end STARS #######%> 
-&lpar;<%= score_as_percentage(@portfolio) %>&percnt;&rpar;
-
-<%= link_to @reviews_link_text, portfolio_reviews_path(@portfolio) %>
-
 
 <p>
   <%= @portfolio.bio %>
@@ -37,8 +43,12 @@
 <% if @portfolio_has_photos %>
   <h2> Some of <%= @portfolio.user.first_name %>&rsquo;s work: </h2>
   <% @portfolio_photos.each do |photo| %>
-    <%= link_to photo.description, portfolio_photo_path(@portfolio, photo) %><br>
+    <%= link_to (image_tag photo.image[:small].url), portfolio_photo_path(@portfolio, photo) %><br>
   <% end %>
 <% end %>
 
-<%= link_to 'Back', portfolios_path %>
+<% if @portfolio.user == current_user %>
+  <%= link_to 'Add a photo', new_portfolio_photo_path(@portfolio) %><br>
+<% end %>
+
+<%= link_to 'Back', :back %>

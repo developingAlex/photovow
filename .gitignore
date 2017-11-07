@@ -21,4 +21,9 @@
 /yarn-error.log
 
 .byebug_history
+
+#ignore private environment variables file
 .env
+
+#ignore media files uploaded by users
+/public/uploads

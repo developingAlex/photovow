@@ -99,4 +99,45 @@ regardless below are some of them:
 1. Spend 10 minutes trying to figure out why my view wasn't being loaded when the route successfully directs to the correct controller action only to realise I had put the view .html.erb file in the wrong views folder (mistakenly put it in the rspec views folder)
 1. Spend a few hours coding the logic behind determining if a user is making a new offer on a listing or revising their existing one, only to realise after looking into a routing issue that giving a model to a form makes the form smart enough to know that the submit button will then invoke a POST or PATCH depending on whether the object passed in is a new one or an existing one. That POST or PATCH can then be routed to the appropriate action. which is obvious as it's how scaffolding works out the box...
 1. Realise after multiple routing errors that I was not going to succeed in the direction I was trying to go, possibly because I was not passing through two arguments to a nested resource in the 'apply' link of the listing show page. 
-1. Reaslise that the routing error I was spending hours trying to tackle and multiple variations of syntax, was due to my form not being declared to be on two different models, (which was neccessary because the models were nested.)
+1. Realise that the routing error I was spending hours trying to tackle and multiple variations of syntax, was due to my form not being declared to be on two different models (which was neccessary because the models were nested.)
+1. After half a day of struggling with Shrine to get it to work, and viewing over and over my instructors screen recording of the tutorial from when he went through it in class, I finally got the shrine image uploading to work and the issue was from an incorrect syntax in the __image_uploader.rb__ file. See this segment of code:
+    ```
+    def process(io, context)
+      case context[:phase]
+      when :store
+        size_700 = resize_to_limit(io.download, 700, 700)
+        size_500 = resize_to_limit(size_700, 500, 500)
+        size_300 = resize_to_limit(size_500, 300, 300)
+        thumb = resize_to_limit(size_300, 200, 200)
+        { original: io, large: size_700, medium: size_500, small: size_300, thumb: thumb }
+      end
+    end
+    ```
+    because it was originally like this:
+    ```
+    def process(io, context)
+      case context[:phase]
+      when :store
+        size_700 = resize_to_limit!(io.download, 700, 700)
+        size_500 = resize_to_limit(size_700, 500, 500)
+        size_300 = resize_to_limit(size_500, 300, 300)
+        thumb = resize_to_limit!(size_300, 200, 200)
+        { original: io, large: size_700, medium: size_500, small: size_300, thumb: thumb }
+      end
+    end
+    ```
+    Those extra exclamation marks were copy and paste errors.
+    The error message I would get didn't hint that that was the cause, uploading of images appeared to function alright, but upon attempting to display the image on the page it was produce a rails error screen because the image_url tag wouldn't work or it would display an error similar to any of the following depending on the variation of syntax I would try to use:
+      * `Unexpected token at '#<ActionDispatch::Http::UploadedFile:0x078...>`
+      * `Undefined method 'image_url' for #....`
+      * `Undefined method 'image_data' for ...`
+      * No error produced, but attempt to display the image results in `#<ActionDispatch::Http::UploadedFile:0x078...>` being printed instead of an image being displayed.
+1. In regards to the previous point, I verified it was working by testing with another test user account which did not yet have a portfolio picture, upon revisiting the original problematic test account the error still occurred when trying to update the portfolios image through the url .../portfolio/1/edit.
+ `JSON::ParserError: 743: unexpected token at '#<ActionDispatch::Http::UploadedFile:0x007f4908044b30>'
+`
+The issue must have been that the image stored in the portfolio model was corrupted by my previous attempts to upload an image. It's highly likely that this had something to do with the errors I was getting before, but the exclamation marks probably still needed correcting..
+  * lesson learned: if at first you don't succeed, try again. If it's been two hours, recreate all data fresh, and restart all servers.
+1. Realise that the layout I had defined in my figma would require a greater understanding of dealing with forms and mixing two different active records together so decided to go with the easiest option to get as much implemented by the deadline.
+  * lesson learned: know more your capabilities and plan for deadlines.
+1. Didn't realise the consequences of my decision to put the first\_name and last\_name attributes against the devise user model would impact my ability to give the user the ability to change them when they're editing their portfolio because I'm effectively wanting to give them the ability to edit aspects of two different models in the one form. A stackoverflow answer suggests using a method called accepts\_nested\_attributes\_for :othermodel in the model that the form is predominantly about. The issue I discovered with this approach is that validation fails because the attempt to update through the form results in an error notice that email and password can't be blank, so by incorporating some of the attributes from the user model, it then expected to get all the attributes for the user model. I tried to add the email and password as hidden fields in the form to see if that would do the trick but that didn't work because then the error message became "that email is already taken" as if it was attempting to create an entirely new user. I'm sure Devise has done some magic in that area and to provide some security (it seems dodgy putting a password in a hidden field) so at this point I think I will have to diverge from my wireframes again and direct the user to edit their first\_name and last\_name attributes through the forms provided by devise like to update their passwords or email address.
+  * lesson learned: Don't try to partially mess with a model that is under the guise of Devise.

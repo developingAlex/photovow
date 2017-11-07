@@ -1,8 +1,9 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>&lt;Image data&gt;</strong>
-  <%= @photo.image_data %>
+  <% if !@photo.image_data.empty? && !@photo.image_data.nil? %>
+    <%= image_tag @photo.image[:large].url %>
+  <% end %>
 </p>
 
 <p>
@@ -13,8 +14,9 @@
   <%= @photo.description %>
 </p>
 <% if @photo.portfolio.user == current_user %>
-  <%= link_to 'Edit', edit_photo_path(@photo) %> | 
-  <%= link_to 'Delete', @photo, method: :delete %> | 
+  <%= link_to 'Edit', edit_portfolio_photo_path(@portfolio, @photo) %> | 
+  <%= link_to 'Delete', portfolio_photo_path(@portfolio, @photo), method: :delete %> | 
 <% end %>
-<%= link_to 'Back', :back %>
+
+<%= link_to "Back to #{@portfolio.user.first_name}\'s portfolio", @portfolio %>
   

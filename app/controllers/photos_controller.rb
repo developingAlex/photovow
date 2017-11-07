@@ -1,5 +1,6 @@
 class PhotosController < ApplicationController
   before_action :set_photo, only: [:show, :edit, :update, :destroy]
+  before_action :set_portfolio
 
   # GET /photos
   # GET /photos.json
@@ -25,10 +26,14 @@ class PhotosController < ApplicationController
   # POST /photos.json
   def create
     @photo = Photo.new(photo_params)
+    @photo.portfolio = @portfolio
 
     respond_to do |format|
-      if @photo.save
-        format.html { redirect_to @photo, notice: 'Photo was successfully created.' }
+      if @portfolio.user != current_user
+        format.html { render :new }
+        format.json { render json: @photo.errors, status: :you_must_be_the_owner_of_the_portfolio }
+      elsif @photo.save
+        format.html { redirect_to portfolio_photo_path(@portfolio, @photo), notice: 'Photo was successfully created.' }
         format.json { render :show, status: :created, location: @photo }
       else
         format.html { render :new }
@@ -42,7 +47,7 @@ class PhotosController < ApplicationController
   def update
     respond_to do |format|
       if @photo.update(photo_params)
-        format.html { redirect_to @photo, notice: 'Photo was successfully updated.' }
+        format.html { redirect_to portfolio_photo_path(@portfolio, @photo), notice: 'Photo was successfully updated.' }
         format.json { render :show, status: :ok, location: @photo }
       else
         format.html { render :edit }
@@ -56,7 +61,7 @@ class PhotosController < ApplicationController
   def destroy
     @photo.destroy
     respond_to do |format|
-      format.html { redirect_to photos_url, notice: 'Photo was successfully destroyed.' }
+      format.html { redirect_to @portfolio, notice: 'Photo was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -67,8 +72,14 @@ class PhotosController < ApplicationController
       @photo = Photo.find(params[:id])
     end
 
+    def set_portfolio
+      @portfolio = Portfolio.find(params[:portfolio_id])
+    end
+
+    
     # Never trust parameters from the scary internet, only allow the white list through.
     def photo_params
-      params.require(:photo).permit(:image_data, :portfolio_id, :description)
+      params.require(:photo).permit(:image, :description)
     end
+
 end
