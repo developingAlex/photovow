@@ -5,25 +5,29 @@
     <%= csrf_meta_tags %>
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+
+    <!-- landing page font -->
+    <link href="https://fonts.googleapis.com/css?family=Gravitas+One" rel="stylesheet"> 
+
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
-  <body>
+  <body class="photovow-bg-color">
     <!-- banner -->
     <div class="banner">
       <% if user_signed_in? %>
         <% user = current_user.first_name %>
-        <%= link_to "Sign out #{user}", destroy_user_session_path, method: :delete %>
+        <%= link_to "Sign out #{user}", destroy_user_session_path, method: :delete, class: :btn %>
       <% else %>
-        <%= link_to 'Sign in', new_user_session_path %>
+        <%= link_to 'Sign in', new_user_session_path, class: :btn %>
       <% end %>
       |
-      <%= link_to 'Home', home_index_path %>
+      <%= link_to 'Home', home_index_path, class: :btn %>
 
     </div>
     <p class="notice"><%= notice %></p>
     <p class="alert"><%= alert %></p>
-    <div class="center">
+    <div class="center photovow-bg-color">
       <%= yield %>
     </div>
   </body>
