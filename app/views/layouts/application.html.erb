@@ -14,20 +14,22 @@
 
   <body class="photovow-bg-color">
     <!-- banner -->
-    <div class="banner">
-      <% if user_signed_in? %>
-        <% user = current_user.first_name %>
-        <%= link_to "Sign out #{user}", destroy_user_session_path, method: :delete, class: :btn %>
-      <% else %>
-        <%= link_to 'Sign in', new_user_session_path, class: :btn %>
-      <% end %>
-      |
-      <%= link_to 'Home', home_index_path, class: :btn %>
+    <nav class="banner navbar navbar-default navbar-fixed-top">
+      <div class="container">
+        <% if user_signed_in? %>
+          <% user = current_user.first_name %>
+          <%= link_to "Sign out #{user}", destroy_user_session_path, method: :delete, class: :btn %>
+        <% else %>
+          <%= link_to 'Sign in', new_user_session_path, class: :btn %>
+        <% end %>
+        |
+        <%= link_to 'Home', home_index_path, class: :btn %>
+      </div>
+    </nav>
 
-    </div>
     <p class="notice"><%= notice %></p>
     <p class="alert"><%= alert %></p>
-    <div class="center photovow-bg-color">
+    <div class="center">
       <%= yield %>
     </div>
   </body>
