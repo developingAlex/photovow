@@ -89,8 +89,23 @@ regardless below are some of them:
 [The wireframe is available for viewing on figma](https://www.figma.com/file/UIzz6sN16w4vkLpuZxoFb7jj/Wedding-photography-site)
 
 ### Graphic Design
+#### splash image
+I had a look on unsplash.com for some images to use on the sites splash page. 
+I found the following bouquet photo which I thought would be suitable:<br>
+![photo of a wedding bouquet](/readme-assets/unsplash1.jpg)<br>
+There were many wedding photos available on that site but then I realised I wanted to emphasise the photography aspect, so then I looked for photography and camera related photos and saw this one:<br>
+![photo of a camera showing the image being focused through the lens](/readme-assets/unsplash2.jpg)<br>
+Then I had the thought of putting a wedding related photo into that cameras viewfinder and with some GIMP editing ended up with this:<br>
+![photo of a camera showing the bouquet image edited in](/readme-assets/editedcameraimage.jpg)<br>
 
-&lt;To be completed&gt;
+#### colour palette
+I took advantage of the colorpicker in GIMP and the bouquet image to determine the exact colors appearing in the petals of the flowers:<br>
+![colour palette creation](/readme-assets/palettedevelopment.jpg)<br>
+
+Such colours have a soft look to them like pastels. throwing in two of the colours into colormind.io, locking them, and getting colormind to generate the others resulted in one set of colours that looked nice, and consisted of a range of contrasts which would be useful for the various elements of the site: Background, Typography, Borders, Buttons, Highlights etc.<br>
+<br>
+Below is the initial colour palette:<br> 
+![initial colour palette](/readme-assets/initialpalette.jpg)<br>
 
 ## Notable issues or stuggles encountered along the way
 1. I forgot to run the rails new command with --database=postgresql so had to do a second dummy take to get the right content for the database.yml file.
