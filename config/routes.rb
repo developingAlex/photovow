@@ -1,10 +1,18 @@
 Rails.application.routes.draw do
   
-  devise_for :users, controllers: {
-    registrations: 'users/registrations'
-  }
+  
+    devise_for :users, controllers: {
+      registrations: 'users/registrations'
+    }
+    
+
+  get 'conversations/index' => 'conversations#index', as: 'conversations' 
+  get 'conversations/show' => 'conversations#show', as: 'conversation'
+  get 'conversations/new' => 'conversations#new', as: 'new_conversation'
+  get 'conversations/create'
 
   root :to => 'listings#landing'
+
   
   get 'home/index'
   # get 'offer/index'
