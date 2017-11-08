@@ -1,2 +1,53 @@
-<h1>Conversations#show,</h1>
-<p>Find me in app/views/conversations/show,.html.erb</p>
+<h3>Your conversation with <%= other_conversation_participant_fullname(@conversation) %></h3>
+<% @messages.each do |msg| %>
+  <%# author content created_at %>
+  <% message_class = msg.is_written_by(current_user) ? 'sender' : 'recipient' %>
+  <details>
+    <summary>
+      <div class="messagebubble mb-4 <%= message_class %>">
+        <div class="messageheader">
+          <%= "#{msg.author.fullname}:" %>
+        </div>
+        <div class="messagecontent">
+          <%= msg.content %>
+        </div>
+      </div>
+    </summary>
+      <div class="messagedatestamp">
+        <%= msg.created_at.to_formatted_s(:long) %>
+      </div>
+  </details>
+
+
+<% end %>
+
+<%= form_with(model: [@conversation, @message], url: conversation_path(@conversation), local: true) do |f| %>
+  <% if @message.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(photo.errors.count, "error") %> prohibited this message from being sent:</h2>
+
+      <ul>
+      <% @message.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%#= f.label :description %>
+    <%= f.hidden_field :conversation_id, value: @conversation.id, id: :message_conversation %>
+  </div>
+
+  <div class="field">
+    <%#= f.label :description %>
+    <%= f.text_area :content, id: :message_content, class: :sender %>
+  </div>
+
+  <div class="actions">
+    <%= f.button 'Send', type: 'submit' %>
+  </div>
+
+<% end %>
+
+

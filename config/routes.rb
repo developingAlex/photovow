@@ -1,13 +1,15 @@
 Rails.application.routes.draw do
   
   
+  get 'messages/create'
+
     devise_for :users, controllers: {
       registrations: 'users/registrations'
     }
     
-
+  post 'conversations/:id/show' => 'messages#create'
   get 'conversations/index' => 'conversations#index', as: 'conversations' 
-  get 'conversations/show' => 'conversations#show', as: 'conversation'
+  get 'conversations/:id/show' => 'conversations#show', as: 'conversation'
   get 'conversations/new' => 'conversations#new', as: 'new_conversation'
   get 'conversations/create'
 

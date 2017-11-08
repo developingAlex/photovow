@@ -1,2 +1,8 @@
-<h1>Conversations#index,</h1>
-<p>Find me in app/views/conversations/index,.html.erb</p>
+<h2> My Conversations </h2>
+
+<% @conversations.each do |conversation| %>
+<div>
+  <%= link_to other_conversation_participant_fullname(conversation),
+              conversation_path(conversation) %>
+</div>
+<% end %>
