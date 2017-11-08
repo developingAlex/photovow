@@ -16,8 +16,31 @@
 
  @import "font-awesome";
  @import "bootstrap";
+
+ .banner, .notice, .alert{
+   margin-bottom: 0px;
+   padding-top: 0px;
+   padding-bottom: 0px;
+   background-color: black;
+
+ }
+ .banner{
+ }
+
+ .photovow-bg-color{
+   background-color: #DFD8CD;
+ }
   .center{
     text-align: center;
+  }
+
+  #photovowtitle{
+    font-family: 'Gravitas One', cursive;
+    color: palegoldenrod;
+    
+    //text-stroke is non-standard and volatile
+    -webkit-text-stroke-width: thin;
+    -webkit-text-stroke-color: #B95061;
   }
 
   .listing{
@@ -41,5 +64,15 @@
   }
 
   .recipient{
+      
+  }
+  .bannerimg{
+    height: 50%;
+    padding-bottom: 50%;
+    background-image: url("splashImage-darkenedtop-original-1400w-75qual-99kb.jpg");
+    background-position-y: 100%;
+    background-size: cover;
+    background-position: fixed;
+    background-repeat: no-repeat;
 
   }
