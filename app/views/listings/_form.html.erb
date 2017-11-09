@@ -11,34 +11,32 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= form.label :owner_id %>
-    <%= form.text_field :owner_id, id: :listing_owner_id %>
-  </div>
+    <%#= form.label :owner_id %>
+    <%= form.hidden_field :owner_id, id: :listing_owner_id %>
 
   <div class="field">
     <%= form.label :title %>
-    <%= form.text_field :title, id: :listing_title %>
+    <%= form.text_field :title, id: :listing_title, placeholder: 'eg A and B\'s wedding @ C' %>
   </div>
 
   <div class="field">
     <%= form.label :venue %>
-    <%= form.text_field :venue, id: :listing_venue %>
+    <%= form.text_field :venue, id: :listing_venue, placeholder: 'address of the wedding' %>
   </div>
 
   <div class="field">
     <%= form.label :city %>
-    <%= form.text_field :city, id: :listing_city %>
+    <%= form.text_field :city, id: :listing_city, placeholder: 'where your wedding will be held' %>
   </div>
 
   <div class="field">
     <%= form.label :country %>
-    <%= form.text_field :country, id: :listing_country %>
+    <%= form.text_field :country, id: :listing_country, placeholder: 'of your wedding' %>
   </div>
 
   <div class="field">
     <%= form.label :content %>
-    <%= form.text_area :content, id: :listing_content %>
+    <%= form.text_area :content, id: :listing_content, placeholder: 'Describe the venue, the duration, and anythig noteworthy, why would they love to work your wedding?' %>
   </div>
 
   <div class="field">
@@ -46,17 +44,7 @@
     <%= form.date_select :date, id: :listing_date %>
   </div>
 
-  <div class="field">
-    <%= form.label :accepted_offer %>
-    <%= form.number_field :accepted_offer, id: :listing_accepted_offer %>
-  </div>
-
-  <div class="field">
-    <%= form.label :date_accepted %>
-    <%= form.date_select :date_accepted, id: :listing_date_accepted %>
-  </div>
-
-  <div class="actions">
+   <div class="actions">
     <%= form.submit %>
   </div>
 <% end %>
