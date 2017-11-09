@@ -36,32 +36,20 @@ author
   </tbody>
 </table>
 
-<table>
-  <thead>
-    <tr>
-      <th>Author</th>
-      <th>Portfolio</th>
-      <th>Content</th>
-      <th>Rating</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @reviews.each do |review| %>
-      <tr>
-        <td><%= review.author %></td>
-        <td><%= review.portfolio %></td>
-        <td><%= review.content %></td>
-        <td><%= review.rating %></td>
-        <td><%= link_to 'Show', portfolio_review_path(@portfolio, review) %></td>
-        <td><%= link_to 'Edit', edit_portfolio_review_path(@portfolio, review) %></td>
-        <td><%= link_to 'Destroy', portfolio_review_path(@portfolio, review), method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+    <%# @reviews.each do |review| %>
+   
+        <%#= review.author %>
+        <%#= review.portfolio %>
+        <%#= review.content %>
+        <%#= review.rating %>
+        <%#= link_to 'Show', portfolio_review_path(@portfolio, review) %>
+        <%#= link_to 'Edit', edit_portfolio_review_path(@portfolio, review) %>
+        <%#= link_to 'Destroy', portfolio_review_path(@portfolio, review), method: :delete, data: { confirm: 'Are you sure?' } %>
+    
 
 <br>
-
 <%= link_to 'New Review', new_portfolio_review_path %>
+<br>
+<br>
+<%= link_to 'Back', @portfolio %>
+
