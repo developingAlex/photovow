@@ -1,18 +1,4 @@
-/*
- * This is a manifest file that'll be compiled into application.css, which will include all the files
- * listed below.
- *
- * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
- * vendor/assets/stylesheets directory can be referenced here using a relative path.
- *
- * You're free to add application-wide styles to this file and they'll appear at the bottom of the
- * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
- * files in this directory. Styles in this file should be added after the last require_* statement.
- * It is generally better to create a new file per style scope.
- *
- *= require_tree .
- *= require_self
- */
+
 
  @import "font-awesome";
  @import "bootstrap";
@@ -36,11 +22,11 @@
 
   #photovowtitle{
     font-family: 'Gravitas One', cursive;
-    color: palegoldenrod;
+    color: #B95061;
     
     //text-stroke is non-standard and volatile
     -webkit-text-stroke-width: thin;
-    -webkit-text-stroke-color: #B95061;
+    -webkit-text-stroke-color: palegoldenrod;
   }
 
   .listing{
@@ -54,17 +40,45 @@
   }
 
   .messagebubble{
-    
+    border-radius: 4px;
   }
   .messageheader{}
   .messagecontent{}
+  .messagescontainer{
 
-  .sender{
-    background-color: #FFFDCF;
   }
-
-  .recipient{
+  .sendermessagecontainer{
+    max-width: 80%;
+    margin-right: 0;
+    margin-left: auto;
+    padding-right: 20px;
+  }
+  .recipientmessagecontainer{
+    max-width: 80%;
+    margin-right: auto;
+    margin-left: 0;
+    padding-left: 20px;
+  }
+  .newmessageform{
+    max-width: 80%;
+    padding-right: 20px;
+    margin-right: 0;
+    margin-left: auto;
+  }
+  #message_content{
+    border-radius: 4px;
+    width: 100%;
+  }
+  .messagecontainer{
+    text-align: left;
+  }
+  .sender{
+    background-color: #CCA9A6;
       
+  }
+  
+  .recipient{
+    
   }
   .bannerimg{
     height: 50%;

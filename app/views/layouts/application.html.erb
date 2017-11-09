@@ -16,14 +16,14 @@
     <!-- banner -->
     <nav class="banner navbar navbar-default navbar-fixed-top">
       <div class="container">
+        <%= link_to 'Home', home_index_path, class: :btn %>
+        |
         <% if user_signed_in? %>
           <% user = current_user.first_name %>
           <%= link_to "Sign out #{user}", destroy_user_session_path, method: :delete, class: :btn %>
         <% else %>
           <%= link_to 'Sign in', new_user_session_path, class: :btn %>
         <% end %>
-        |
-        <%= link_to 'Home', home_index_path, class: :btn %>
       </div>
     </nav>
 
