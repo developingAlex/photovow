@@ -12,6 +12,8 @@ module Photovow
     config.load_defaults 5.1
     # heroku asset pipeline fix:
     config.serve_static_assets = true
+    config.serve_static_files = true
+    config.assets.compile = true
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
