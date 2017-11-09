@@ -3,7 +3,14 @@ class OfferController < ApplicationController
   before_action :authenticate_user! # when not signed in do not reveal anything about offers.
 
   def index
-    @offers = Offer.where(photographer: current_user)
+    users_listing = Listing.where(owner: current_user)
+    @offers = Offer.where(listing: users_listing)
+    # photographers portfolios, 
+    @portfolio_ids = []
+    @offers.each do |offer|
+      #offer has a photographer id and portfolio has a user id.
+      @portfolio_ids << Portfolio.find_by(user: offer.photographer).id
+    end
   end
 
   def create

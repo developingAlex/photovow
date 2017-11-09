@@ -6,7 +6,7 @@
   <%# manage my listing link for planners %>
   <%= link_to 'Manage my listing', @wedding_listing %><br>
 
-  <%# 'review offers' link for planners %>
+  <%= link_to  'Review my offers', listing_offer_index_path(@wedding_listing) %> <br>
 
 
 <% else %> <%#  ################   PHOTOGRAPHER   ##################%>
