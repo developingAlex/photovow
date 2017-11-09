@@ -17,6 +17,9 @@ gem 'image_processing'
 gem 'mini_magick'
 gem 'shrine'
 
+## AWS api gem:
+gem 'aws-sdk', '~> 3'
+
 #font awesome for stars
 gem 'font-awesome-rails'
 # css library;
