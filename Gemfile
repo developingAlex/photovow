@@ -60,6 +60,11 @@ group :development, :test do
   gem 'rspec-rails', '~> 3.6'
 end
 
+group :production do # added for heroku compatibility
+  gem 'rails_log_stdout',           github: 'heroku/rails_log_stdout'
+  gem 'rails3_serve_static_assets', github: 'heroku/rails3_serve_static_assets'
+end
+
 group :development do
   # Access an IRB console on exception pages or by using <%= console %> anywhere in the code.
   gem 'web-console', '>= 3.3.0'
