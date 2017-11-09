@@ -5,7 +5,11 @@
   <li>
     <%= link_to offer.photographer.first_name, portfolio_path(@portfolio_ids[portfolio]) %>
      : <%= number_to_currency(offer.amount) %>
-     : Accept
+     : <% if @listing.date_accepted.nil? %>
+     <%= link_to "Accept", accept_offer_path(id: @listing.id, offer_id: offer.id), method: :patch %>
+     <% elsif @listing.accepted_offer == offer.id %>
+      Accepted!
+     <% end %>
   </li>
 <% end %>
 </ul>

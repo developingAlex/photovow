@@ -54,7 +54,23 @@ class ListingsController < ApplicationController
     end
   end
 
-  
+  def accept_offer
+    # run when the listing owner accepts a particular offer
+
+    # t.integer "accepted_offer"
+    # t.date "date_accepted"
+    @listing = Listing.find(params[:id])
+    if current_user == @listing.owner
+      puts 'offer accepted! '
+      @listing.accepted_offer = params[:offer_id]
+      @listing.date_accepted = Date.today
+      @listing.save
+      redirect_to listing_offer_index_path(@listing)
+    end
+    
+
+  end
+
   # POST /listings/1/apply
   def submit_offer
     #create a new offer model if the person has not already made an offer, if they have then bring up their old one and change the value.

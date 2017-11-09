@@ -1,10 +1,11 @@
 class OfferController < ApplicationController
   before_action :set_offer, only: [:show, :apply, :submit_offer, :edit, :update, :destroy]
+  before_action :set_listing, only: [:index, :accept_offer, :show, :apply, :submit_offer, :edit, :update, :destroy]
   before_action :authenticate_user! # when not signed in do not reveal anything about offers.
 
   def index
-    users_listing = Listing.where(owner: current_user)
-    @offers = Offer.where(listing: users_listing)
+    @users_listing = Listing.where(owner: current_user)
+    @offers = Offer.where(listing: @users_listing)
     # photographers portfolios, 
     @portfolio_ids = []
     @offers.each do |offer|
@@ -38,8 +39,11 @@ class OfferController < ApplicationController
 
   private
 
-  def set_offer
+  def set_listing
     @listing = Listing.find(params[:listing_id])
+  end
+
+  def set_offer
     @offer = Offer.where(photographer: current_user, listing: @listing)
   end
 
