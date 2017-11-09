@@ -3,6 +3,13 @@
 Stop wondering where all the work is! It&rsquo;s right here!
 </p>
 
+<div class="search align-self-center ">
+  <%= form_tag(@listing, method: "get") do %>
+    <%= text_field_tag :search, params[:search], placeholder: "Search listings" %>
+    <%= submit_tag "Search" %>
+  <% end %>
+</div>
+
 <% @listings.each do |listing| %>
   <div class="listing">
     <h3>
