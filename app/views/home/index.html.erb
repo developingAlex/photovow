@@ -1,33 +1,33 @@
-<div class="center">
-  <% if @has_wedding_listing %> <%#  ################   WEDDING PLANNER   ##################%>
-    <%# assume they're a wedding planner if they have a wedding listing.%>
-    
-    <h4> looks like you have a listing! I&rsquo;ll assume you&rsquo;re a wedding planner! </h4>
-    
-    <%# manage my listing link for planners %>
-    <%= link_to 'Manage my listing', @wedding_listing %><br>
+<% if @has_wedding_listing %> <%#  ################   WEDDING PLANNER   ##################%>
+  <%# assume they're a wedding planner if they have a wedding listing.%>
+  
+  <h4> looks like you have a listing! I&rsquo;ll assume you&rsquo;re a wedding planner! </h4>
+  
+  <%# manage my listing link for planners %>
+  <%= link_to 'Manage my listing', @wedding_listing %><br>
 
-    <%# 'review offers' link for planners %>
+  <%# 'review offers' link for planners %>
 
 
-  <% else %> <%#  ################   PHOTOGRAPHER   ##################%>
-    <%# assume they're a photographer if they don't have a wedding listing.%>
-    <h4> looks like you don&rsquo;t have a listing!  I&rsquo;ll assume you&rsquo;re a photographer!</h4>
-    <%# see upcoming weddings link for photographers %>
-    <%= link_to 'See upcoming weddings', listings_path %><br>
-    <%# 'my profile' link for photographers %>
-    <%# redirect them to create a new profile if they don't already have one %>
-    <% if @no_portfolio_yet %>
-    <%= link_to 'Create my portfolio', new_portfolio_path %><br>
-    <% else %>
-    <%= link_to 'My portfolio', @portfolio %><br>
-    <% end %>
-
+<% else %> <%#  ################   PHOTOGRAPHER   ##################%>
+  <%# assume they're a photographer if they don't have a wedding listing.%>
+  <h4> looks like you don&rsquo;t have a listing!  I&rsquo;ll assume you&rsquo;re a photographer!</h4>
+  <%# see upcoming weddings link for photographers %>
+  <%= link_to 'See upcoming weddings', listings_path %><br>
+  <%# 'my profile' link for photographers %>
+  <%# redirect them to create a new profile if they don't already have one %>
+  <% if @no_portfolio_yet %>
+  <%= link_to 'Create my portfolio', new_portfolio_path %><br>
+  <% else %>
+  <%= link_to 'My portfolio', @portfolio %><br>
   <% end %>
-    <%# 'my conversations' link for planners %>
-    <%# 'my conversations' link for photographers %>
-  <%= link_to 'My Conversations', conversations_path %>
-</div>   
+
+<% end %>
+  <%# 'my conversations' link for planners %>
+  <%# 'my conversations' link for photographers %>
+<%= link_to 'My Conversations', conversations_path %><br>
+<%= link_to 'Login profile', edit_user_registration_path %>
+
 
 
 <%# 
@@ -54,3 +54,4 @@ source:
 https://www.figma.com/file/UIzz6sN16w4vkLpuZxoFb7jj/Wedding-photography-site
 
 %>
+
