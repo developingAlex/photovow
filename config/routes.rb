@@ -32,6 +32,8 @@ Rails.application.routes.draw do
   resources :listings do
     resources :offer
   end
+
+  patch '/listings/:id/offer' => 'listings#accept_offer', as: 'accept_offer'
   resources :portfolios do
     resources :reviews
     resources :photos

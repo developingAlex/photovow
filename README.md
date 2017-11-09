@@ -159,3 +159,4 @@ Below is the initial colour palette:<br>
     * lesson learned: Don't try to partially mess with a model that is under the guise of Devise.
 1. Got sick the night before the day before the project was due and didn't feel any better till the afternoon before the project was due so that took a hit to my productivity.
     * lesson learned: Don't assume that because you still have two days left to work on your project that you'll be able to work on your project for two days.
+1. When pushing to Heroku, the splash screen's banner image didn't load, and devise was broken. Also attempting to setup the site with `heroku run rake db:migrate` fails with a timedout error. A [Stackoverflow](https://stackoverflow.com/questions/14892200/cant-heroku-run-rake-db-migrate-through-my-app) answer provided the solution to run the command as `heroku run:detached rake db:migrate`

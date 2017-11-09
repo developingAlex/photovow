@@ -1,5 +1,17 @@
-<h1>Offer#index</h1>
-<p>Find me in app/views/offer/index.html.erb</p>
-<% @offers.each do |offer| %>
-  <%= offer.photographer.first_name %>:<%= number_to_currency(offer.amount) %>
+<h3>Offers for your listing</h3>
+
+<ul>
+<% @offers.each_with_index do |offer, portfolio| %>
+  <li>
+    <%= link_to offer.photographer.first_name, portfolio_path(@portfolio_ids[portfolio]) %>
+     : <%= number_to_currency(offer.amount) %>
+     : <% if @listing.date_accepted.nil? %>
+     <%= link_to "Accept", accept_offer_path(id: @listing.id, offer_id: offer.id), method: :patch %>
+     <% elsif @listing.accepted_offer == offer.id %>
+      Accepted!
+     <% end %>
+  </li>
 <% end %>
+</ul>
+<br><br>
+<%= link_to 'Back', home_index_path %>
