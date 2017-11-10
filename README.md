@@ -90,6 +90,9 @@ regardless below are some of them:
 
 [The wireframe is available for viewing on figma](https://www.figma.com/file/UIzz6sN16w4vkLpuZxoFb7jj/Wedding-photography-site)
 
+Here are a couple of screenshots just in case the link doesn't work:<br>
+![figma1](/readme-assets/figma1.jpg)
+![figma2](/readme-assets/figma2.jpg)
 ### Graphic Design
 #### splash image
 I had a look on unsplash.com for some images to use on the sites splash page. 
