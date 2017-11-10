@@ -31,6 +31,8 @@ regardless below are some of them:
 - In order to earn money, as a photographer enthusiast/hobbyist with free-time, I want to be able to apply for work at upcoming weddings that are occurring when I have free time.
 - In order to increase my chances of getting work to earn money, as a talented photographer, I want to be able to showcase my work to stand out from other photographers.
 
+![trello screenshot](/readme-assets/trello_screenshot.jpg)
+
 ### Database tables / Models
 
 #### User
