@@ -24,10 +24,11 @@ Rails.application.routes.draw do
   # get 'offer/show'
   # get 'offer/update'
   # get 'offer/destroy'
-
   get '/listings/:id/apply' => 'listings#apply', as: 'apply_listing'
-  # post '/listings/:id/apply' => 'listings#submitoffer', as: 'submit_offer_listing'
-  patch '/listings/:id/revise_offer_listing' => 'offers#edit', as: 'revise_offer_listing'
+
+  post '/listings/:id/apply' => 'listings#submit_offer', as: 'submit_offer_listing'
+  
+  patch '/listings/:id/apply' => 'offer#edit', as: 'revise_offer_listing'
   # patch '/listings/:id/revise_offer_listing' => 'offers#edit', as: '/listings/:id/revise_offer_listing'
   resources :listings do
     resources :offer

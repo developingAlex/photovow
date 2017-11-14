@@ -101,7 +101,11 @@ class ListingsController < ApplicationController
     if !@offer.nil? && offer_params[:amount] > 0
       @offer.amount = offer_params[:amount]
     else
-
+      puts "########################################"
+      puts " "
+      puts "         listings#revise_offer"
+      puts " "
+      puts "########################################"
     end
   end
   # POST /listings
@@ -156,7 +160,7 @@ class ListingsController < ApplicationController
     end
 
     def offer_params
-      params.require(:apply).permit(:id, :amount)
+      params.require(:offer).permit(:id, :amount)
     end
 
     def prevent_offers_to_themselves

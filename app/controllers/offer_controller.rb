@@ -27,11 +27,25 @@ class OfferController < ApplicationController
   end
 
   def update
-    if @offer.update offer_params
+    if @offer.update_all "amount" => offer_params[:amount]
+      puts "params:"
+      puts params
+      puts "params[:id]:"
+      puts params[:id]
+      puts "offer params:"
+      puts offer_params
       redirect_to @listing
     else
       form.html{ redirect_to apply_listing(@listing), notice: 'please enter a value greater than 0 for amount' }
     end
+
+
+    puts "########################################"
+    puts " "
+    puts "             offer#update"
+    puts " "
+    puts "########################################"
+
   end
 
   def destroy
@@ -48,6 +62,6 @@ class OfferController < ApplicationController
   end
 
   def offer_params
-    params.require(:offer).permit(:amount, :photographer, :listing)
+    params.require(:offer).permit(:amount, :listing_id, :id)
   end
 end
