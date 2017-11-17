@@ -14,9 +14,26 @@ class OffersController < ApplicationController
     end
   end
 
-  def create
-    @offer = Offer.create(offer_params)
-    redirect_to @listing
+  def create 
+
+    puts "########################################"
+    puts " "
+    puts "             offer#create"
+    puts " "
+    puts "########################################"
+    
+    @offer = Offer.new(offer_params)
+    puts offer_params
+    @offer.photographer = current_user
+    @offer.listing = @listing
+
+    
+    if @offer.save
+      redirect_to @listing
+    else
+      redirect_to @listing, notice: 'please enter a value greater than 0 for amount'
+    end
+      
   end
 
   def edit
@@ -32,7 +49,7 @@ class OffersController < ApplicationController
       puts offer_params
       redirect_to @listing
     else
-      form.html{ redirect_to apply_listing(@listing), notice: 'please enter a value greater than 0 for amount' }
+      format.html{ redirect_to @listing, notice: 'please enter a value greater than 0 for amount' }
     end
 
 
