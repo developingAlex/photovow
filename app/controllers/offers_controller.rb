@@ -1,6 +1,6 @@
-class OfferController < ApplicationController
+class OffersController < ApplicationController
+  before_action :set_listing, only: [:index, :accept_offer, :show, :apply, :submit_offer, :edit, :update, :destroy, :create]
   before_action :set_offer, only: [:show, :apply, :submit_offer, :edit, :update, :destroy]
-  before_action :set_listing, only: [:index, :accept_offer, :show, :apply, :submit_offer, :edit, :update, :destroy]
   before_action :authenticate_user! # when not signed in do not reveal anything about offers.
 
   def index
@@ -15,15 +15,11 @@ class OfferController < ApplicationController
   end
 
   def create
-  end
-
-  def new
+    @offer = Offer.create(offer_params)
+    redirect_to @listing
   end
 
   def edit
-  end
-
-  def show
   end
 
   def update

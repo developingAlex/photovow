@@ -31,7 +31,7 @@ Rails.application.routes.draw do
   patch '/listings/:id/apply' => 'offer#edit', as: 'revise_offer_listing'
   # patch '/listings/:id/revise_offer_listing' => 'offers#edit', as: '/listings/:id/revise_offer_listing'
   resources :listings do
-    resources :offer
+    resources :offers, only: [:create, :update]
   end
 
   patch '/listings/:id/offer' => 'listings#accept_offer', as: 'accept_offer'

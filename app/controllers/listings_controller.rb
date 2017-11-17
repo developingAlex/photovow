@@ -25,13 +25,21 @@ class ListingsController < ApplicationController
     if user_signed_in?
       possible_offers = Offer.where(photographer: current_user, listing: @listing)
       if possible_offers.empty?
-        @previous_offer = nil
+        @offer = Offer.new
+        puts 'User signed in but not yet made an offer on this listing'
+        @user_already_applied = false
       else
-        @previous_offer = possible_offers.first
+        @offer = possible_offers.first
+        puts 'User signed in and offer set to previous offer'
+        @user_already_applied = true
       end
     else
-      @previous_offer = nil
+      @offer = nil
+      puts 'User was not signed in so offer set to nil'
+      @user_already_applied = false
     end
+
+    puts @offer.inspect
   end
 
   # GET /listings/new
